@@ -1,6 +1,12 @@
 <?php 
-    $t ='Thomas';
-    echo strlen($t);
+    
+    session_start();
+    if(isset($_SESSION['username'])){
+        $userLoggedIn = $_SESSION['username'];
+    }else{
+        header('Location: register.php');
+    }
+
 
 ?>
 

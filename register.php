@@ -1,18 +1,12 @@
 <?php 
-    
+    session_start();
     require_once 'includes/Account.php';
     $Account = new ACCOUNT();
 
+    require_once 'includes/db.php';
     require_once 'includes/handlers/register-handler.php';
     require_once 'includes/handlers/login-handler.php';
 
-    if(isset($_POST['login'])){
-        
-    }
-
-    if(strlen('tgrauer') < 5 || strlen('tgrauer') > 25){
-        echo 'Your username must between 5 and 25 characters';
-    }
 
 ?>
 
@@ -52,7 +46,7 @@
                     <h2>Login to your account</h2>
                     <div class="form-group">
                         <label for="loginUsername">Username</label>
-                        <input type="text" class="form-control" name="loginUsername" id="loginUsername" required >
+                        <input type="text" class="form-control" name="loginUsername" id="loginUsername" required value="<?php if(isset($loginUsername)){echo $loginUsername;}?>">
                     </div>
 
                     <div class="form-group">
@@ -63,6 +57,7 @@
                     <input type="submit" value="Login" name="login" class="btn btn-md btn-primary">
 
                     <?php 
+
                         if(!empty($login_errors)){
                             echo '<div class="alert alert-danger">';
                             foreach ($login_errors as $e) {
@@ -120,6 +115,12 @@
                                 echo '<p>'.$e.'</p>';
                             }
                             echo '</div>';
+                        }
+
+                        if(isset($reg_error)){
+                            if($reg_error){
+                                echo '<div class="alert alert-danger">Username or email already in use</div>';
+                            }
                         }
                     ?>
                 </form>

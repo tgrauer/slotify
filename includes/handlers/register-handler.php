@@ -64,14 +64,14 @@
                 $e = 'Password must be between 8 and 14 characters';
                 array_push($errors, $e);
             }
-            $password = md5($password);
+            $password = $password;
         }else{
             $e = 'Password is Required';
             array_push($errors, $e);
         }
 
         if(!empty($_POST['conf_password'])){
-            $conf_password = md5($_POST['conf_password']);
+            $conf_password = $_POST['conf_password'];
         }else{
             $e = 'Confirm your password';
             array_push($errors, $e);
@@ -88,7 +88,15 @@
         }
 
         if(empty($errors)){
-            $register = $Account->register($username, $fname, $lname, $email, $conf_email, $password, $conf_password);
+            $register = $Account->register($username, $fname, $lname, $email, $password);
+
+            if(isset($register)){
+                if($register){
+                    header('Location: index.php');
+                }else{
+                    $reg_error=1;
+                }
+            }
         }
     }
     

@@ -26,7 +26,6 @@
                 $_SESSION['username']=$login[0]['username'];
                 header("Location: index.php");
             }else{
-                echo 'error';
                 array_push($login_errors, 'Invalid username / password');
             }
         }

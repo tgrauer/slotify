@@ -18,15 +18,15 @@ $green: #07d159;
 
 body{
     background:#000;
-    color:#4f4e4e;
+    color:#bbb;
     font-size:13px;
+    font-weight: 500;
     font-family: 'Open Sans', sans-serif;
 }
 
 body.bg{
 	background: #000 url(../img/bg.jpg) no-repeat 0 0 ;
 	background-position: center;
-
 	position: relative;
 }
 
@@ -38,6 +38,8 @@ body.bg{
     width: 100%;
     height: 100%;
 }
+
+.form input, .form input:focus{outline: none;box-shadow: none;}
 
 .loginCnt{
 	color: #fff;
@@ -78,6 +80,8 @@ body.bg{
 			background-color: #fff;
 			color:#333;
 		}
+
+		&:focus{outline: none;border: none;}
 	}
 
 	.hasAccount{
@@ -128,9 +132,13 @@ body.bg{
 
 	#nowPlayingBar{
 		display: flex;
-		height: 90px;
-		padding: 15px;
+		height: 105px;
+		padding: 10px 15px 15px;
 		box-sizing:border-box;
+
+		.content{
+			height: 57px;
+		}
 	}
 
 	#nowPlayingCenter{
@@ -144,12 +152,151 @@ body.bg{
 	.buttons{
 		margin:  0 auto;
 		display: table;
-		button{
-			background-color: transparent;
-			color: #ddd;
-			font-size: 25px;
+	}
+}
+
+button.controlBtn{
+	background-color: transparent;
+	color: darken(#ddd,20%);
+	font-size: 20px;
+	font-weight: 500;
+	border: none;
+	outline: none !important;
+	vertical-align: middle;
+	padding-bottom: 0;
+	padding-top: 0;
+
+	&.play, &.pause{font-size: 40px;}
+	&:hover{color: #ddd;}
+	&:focus{outline: none !important;border: none; box-shadow: none;}
+}
+
+.progress_time{
+	color: darken(#ddd,20%);
+	font-size: 11px;
+	min-width: 40px;
+	text-align: center;
+}
+
+.playback_bar{display: flex;width: 100%;}
+
+.progressbar{
+	width: 100%;
+	height: 12px;
+	display: inline-flex;
+	cursor: pointer;
+
+	.progressbar_bg{
+		background-color: #555;
+		height: 4px;
+		width: 100%;
+		margin-top: 5px;
+		@include border-radius(2px);
+	}
+
+	.progress_cur{
+		background-color: darken(#ddd,20%);
+		width: 10%;
+		height: 4px;
+		@include border-radius(2px);
+	}
+}
+
+.album_link .album_artwork{
+	max-width: 60px;
+	margin-right: 12px;
+	float: left;
+	margin-top: 10px;
+	background-size: cover;
+}
+
+.track_info{
+	display: table;
+
+	.track_name{
+		margin: 10px 0 3px;
+		width: 100%;
+		display: inline-block;
+		color: #eee;
+		font-size: 14px;
+	}
+
+	.artist_name{
+		font-size: 12px;
+		color: darken(#bbb,15%);
+	}
+}
+
+.volume_bar{
+	position: absolute;
+	right: 0;
+	width: 190px;
+
+	.progressbar{
+		width: 120px;
+	}
+}
+
+#nowPlayingRight{
+	margin-top: 25px;
+}
+
+.top_cnt{
+	min-height: 100%;
+	background-color: lighten(#111,2%);
+}
+
+.nav_sidebar{
+	background: #000;
+	height: 100vh;
+	padding: 0 30px;
+	// position: fixed;
+	// top:0;
+	// left:0;
+}
+
+.nav_bar{
+	padding: 25px;
+	// display: flex;
+	// flex-direction:column;
+
+	.logo{
+		img{
+			width: 35px;
 		}
 	}
 }
+
+.group{
+	border-top: 1px solid #a0a0a0;
+	padding: 10px 0;
+}
+
+.nav_item{
+	font-size: 16px;
+	font-weight: 600;
+	padding: 10px 0;
+	display: block;
+
+	a{
+		color: #a0a0a0;
+		text-decoration: none;
+
+		&:hover{
+			color: #eee;
+		}
+	}
+
+	.nav_link{
+		span i{
+			position: absolute;
+			right: 30px;
+			float: right;
+		}
+	}
+}
+
+
+
 
 @media handheld, only screen and (max-width: 1200px) { }

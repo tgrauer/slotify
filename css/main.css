@@ -252,6 +252,11 @@ button.controlBtn:focus {
   background: #000;
   height: 100vh;
   padding: 0 30px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .nav_bar {
@@ -283,4 +288,105 @@ button.controlBtn:focus {
   position: absolute;
   right: 30px;
   float: right;
+}
+
+#main_view_cnt {
+  padding: 25px;
+  margin-bottom: 100px;
+  position: relative;
+  left: 25%;
+}
+
+.pg_heading_lg {
+  color: #ddd;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.grid_view .album_cover {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.grid_view .album_title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grid_view .album_title a {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+.grid_view .album_title a:hover {
+  color: #eee;
+}
+
+.entity_info img.album_cover {
+  margin-top: 20px;
+}
+.entity_info .album_title {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  color: #ccc;
+  font-size: 28px;
+  font-weight: 600;
+}
+.entity_info p {
+  color: #939393;
+  margin-bottom: 10px;
+}
+
+.track_list {
+  padding: 0;
+  list-style: none;
+  margin-top: 50px;
+}
+.track_list .tracklist_row {
+  height: 75px;
+  padding: 15px 10px;
+}
+.track_list .tracklist_row:hover {
+  background: #2a2a2a;
+}
+.track_list .tracklist_row:hover .play, .track_list .tracklist_row:hover .track_options {
+  visibility: visible;
+}
+.track_list .tracklist_row:hover .track_number {
+  visibility: hidden;
+}
+.track_list .track_info {
+  color: #a0a0a0;
+  width: 75%;
+  float: left;
+}
+.track_list .track_info .track_name {
+  margin: 0;
+  margin-bottom: 7px;
+  display: block;
+}
+.track_list .track_count {
+  width: 8%;
+  float: left;
+}
+.track_list .play {
+  font-size: 22px !important;
+  visibility: hidden;
+  position: absolute;
+}
+.track_list .track_options {
+  float: left;
+  width: 5%;
+  visibility: hidden;
+  font-size: 18px;
+}
+.track_list .track_options:hover {
+  cursor: pointer;
+}
+.track_list .track_duration {
+  width: 12%;
+  float: left;
+  text-align: right;
 }

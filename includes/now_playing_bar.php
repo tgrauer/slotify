@@ -16,36 +16,124 @@
         current_playlist = <?php echo $json_array;?>;
         audio_element = new Audio();
         set_track(current_playlist[0], current_playlist, false);
-    }); 
+        update_time_progressbar(audio_element.audio);
 
-    function set_track(track_id, new_playlist, play){
-
-        $.post('includes/handlers/ajax/get_song_json.php', {song_id: track_id}, function(data) {
-            var track = JSON.parse(data);
-            track = track[0];
-            audio_element.set_track(track);
-            console.log(track);
-            $('#nowPlayingBar .track_info .track_name').html(track.title);
-            $('#nowPlayingBar .track_info .artist_name').html(track.name);
-            $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
-            // $('.progress_time.remaining').html(track.duration);
+        $('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(e){
+            e.preventDefault();
         });
 
-        if(play){
-            play_song();
+        $('.playback_bar .progressbar').mousedown(function() {
+            mouseDown = true;
+        });
+
+        $('.playback_bar .progressbar').mousemove(function(e) {
+            if(mouseDown){
+                time_from_offset(e, this);
+            }
+        });
+
+        $('.playback_bar .progressbar').mouseup(function(e) {
+            time_from_offset(e, this);
+        });
+
+        $('.volume_bar .progressbar').mousedown(function() {
+            mouseDown = true;
+        });
+
+        $('.volume_bar .progressbar').mousemove(function(e) {
+            if(mouseDown){
+                var percentage = e.offsetX / $(this).width();
+                audio_element.audio.volume = percentage;
+            }
+        });
+
+        $('.volume_bar .progressbar').mouseup(function(e) {
+            var percentage = e.offsetX / $(this).width();
+            if(percentage >= 0 && percentage <= 1){
+                audio_element.audio.volume = percentage;
+            }
+        });
+
+        $(document).mouseup(function() {
+            mouseDown = false;
+        });
+
+    }); 
+
+    function time_from_offset(mouse, progressbar){
+        var percentage = mouse.offsetX / $(progressbar).width() * 100;
+        var seconds = audio_element.audio.duration * (percentage / 100);
+        audio_element.set_time(seconds);
+    }
+
+    function prev_song(){
+        if(audio_element.audio.currentTime >= 3 || currentTime == 0){
+            audio_element.set_time(0);
+        }else{
+            current_index = current_index - 1;
+            set_track(current_playlist[current_index], current_playlist, true);
         }
     }
 
-    function play_song(){
+    function next_song(){
 
+        if(repeat){
+            audio_element.set_time(0);
+            play_song();
+            return;
+        }
+
+        if(current_index == current_playlist.length - 1){
+            current_index=0;
+        }else{
+            current_index ++;
+        }
+
+        var trackto_play = current_playlist[current_index];
+        set_track(trackto_play, current_playlist, true);
+    }
+
+    function set_repeat(){
+        repeat = !repeat;
+        $('.controlBtn.repeat').toggleClass('active_btn');
+    }
+
+    function mute(){
+        audio_element.audio.muted = !audio_element.audio.muted;
+        $('button.mute').toggle();
+        $('button.volume').toggle();
+    }
+
+    function set_track(track_id, new_playlist, play){
+        
+        current_index = current_playlist.indexOf(track_id);
+        pause_song();
+
+        $.post('includes/handlers/ajax/get_song_json.php', {song_id: track_id}, function(data) {
+
+            var track = JSON.parse(data);
+            track = track[0];
+            audio_element.set_track(track);
+            play_song();
+
+            $('#nowPlayingBar .track_info .track_name').html(track.title);
+            $('#nowPlayingBar .track_info .artist_name').html(track.name);
+            $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
+        });
+
+        if(play){audio_element.play();}
+    }
+
+    function play_song(){
+        
         if(audio_element.audio.currentTime == 0){
             $.post('includes/handlers/ajax/update_plays.php', {song_id: audio_element.currently_playing.id}, function(data) {
-
             });
         }
 
         $('button.play').hide();
         $('button.pause').show();
+        console.log(audio_element);
         audio_element.play();
     }
 
@@ -81,11 +169,11 @@
         <div class="content playerControls">
             <div class="buttons">
                 <button class="btn controlBtn shuffle" title="Shuffle"><i class="fas fa-random"></i></button>
-                <button class="btn controlBtn previous" title="Previous"><i class="fas fa-step-backward"></i></button>
+                <button class="btn controlBtn previous" title="Previous" onclick="prev_song()"><i class="fas fa-step-backward"></i></button>
                 <button class="btn controlBtn play" title="Play" onclick="play_song()"><i class="fas fa-play-circle"></i></button>
                 <button class="btn controlBtn pause" title="Pause" style="display: none;" onclick="pause_song()"><i class="fas fa-pause-circle"></i></button>
-                <button class="btn controlBtn next" title="Next"><i class="fas fa-step-forward"></i></button>
-                <button class="btn controlBtn repeat" title="Repeat"><i class="fas fa-redo-alt"></i></button>
+                <button class="btn controlBtn next" title="Next" onclick="next_song()"><i class="fas fa-step-forward"></i></button>
+                <button class="btn controlBtn repeat" title="Repeat" onclick="set_repeat()"><i class="fas fa-redo-alt"></i></button>
             </div>
         </div>
 
@@ -103,7 +191,9 @@
 
     <div class="col-sm-4" id="nowPlayingRight">
         <div class="volume_bar">
-            <button class="btn controlBtn volume" title="Volume"><i class="fas fa-volume-up"></i></button>
+            
+            <button class="btn controlBtn mute" title="Volume" onclick="mute()" style="display:none;" ><i class="fas fa-volume-mute"></i></button>
+            <button class="btn controlBtn volume" title="Volume" onclick="mute()"><i class="fas fa-volume-up" ></i></button>
 
             <div class="progressbar">
                 <div class="progressbar_bg">

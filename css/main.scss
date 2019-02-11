@@ -168,6 +168,7 @@ button.controlBtn{
 
 	&.play, &.pause{font-size: 40px;}
 	&:hover{color: #ddd;}
+	&.active_btn{color: $green;}
 	&:focus{outline: none !important;border: none; box-shadow: none;}
 }
 
@@ -178,7 +179,7 @@ button.controlBtn{
 	text-align: center;
 }
 
-.playback_bar{display: flex;width: 100%;}
+.playback_bar,.volume_bar{display: flex;width: 100%;}
 
 .progressbar{
 	width: 100%;
@@ -201,6 +202,9 @@ button.controlBtn{
 		@include border-radius(2px);
 	}
 }
+
+.volume_bar .progress_cur{width: 100%;}
+
 
 .album_link .album_artwork{
 	max-width: 60px;
@@ -234,6 +238,7 @@ button.controlBtn{
 
 	.progressbar{
 		width: 120px;
+		margin-top: 5px;
 	}
 }
 
@@ -374,7 +379,6 @@ button.controlBtn{
 			}
 
 			.track_number{visibility: hidden;}
-		
 		}
 	}
 

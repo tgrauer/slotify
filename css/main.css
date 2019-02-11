@@ -165,6 +165,9 @@ button.controlBtn.play, button.controlBtn.pause {
 button.controlBtn:hover {
   color: #ddd;
 }
+button.controlBtn.active_btn {
+  color: #07d159;
+}
 button.controlBtn:focus {
   outline: none !important;
   border: none;
@@ -178,7 +181,7 @@ button.controlBtn:focus {
   text-align: center;
 }
 
-.playback_bar {
+.playback_bar, .volume_bar {
   display: flex;
   width: 100%;
 }
@@ -205,6 +208,10 @@ button.controlBtn:focus {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
+}
+
+.volume_bar .progress_cur {
+  width: 100%;
 }
 
 .album_link .album_artwork {
@@ -237,6 +244,7 @@ button.controlBtn:focus {
 }
 .volume_bar .progressbar {
   width: 120px;
+  margin-top: 5px;
 }
 
 #nowPlayingRight {

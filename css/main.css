@@ -200,7 +200,7 @@ button.controlBtn:focus {
 }
 .progressbar .progress_cur {
   background-color: #aaaaaa;
-  width: 10%;
+  width: 0%;
   height: 4px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
@@ -351,7 +351,7 @@ button.controlBtn:focus {
 .track_list .tracklist_row:hover {
   background: #2a2a2a;
 }
-.track_list .tracklist_row:hover .play, .track_list .tracklist_row:hover .track_options {
+.track_list .tracklist_row:hover .controlBtn.play, .track_list .tracklist_row:hover .track_options {
   visibility: visible;
 }
 .track_list .tracklist_row:hover .track_number {

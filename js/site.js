@@ -2,9 +2,36 @@
 var current_playlist = [];
 var audio_element;
 
+function format_time(seconds){
+	var time = Math.round(seconds);
+	var minutes = Math.floor(time / 60);
+	var seconds = time - (minutes * 60);
+	var extra_zero = (seconds < 10) ? "0" :"";
+
+	return minutes + ':'+ extra_zero+ seconds;
+}
+
+function update_time_progressbar(audio){
+	$('.progress_time.current').text(format_time(audio.currentTime));
+	$('.progress_time.remaining').text(format_time(audio.duration - audio.currentTime));
+	var progress = audio.currentTime / audio.duration * 100;
+	$('.playback_bar .progress_cur').css({'width': progress +'%'})
+}
+
 function Audio(){
 	this.currently_playing;
 	this.audio = document.createElement('audio');
+
+	this.audio.addEventListener('canplay', function(){
+		var duration = format_time(this.duration)
+		$('.progress_time.remaining').text(duration);
+	});
+
+	this.audio.addEventListener('timeupdate', function(){
+		if(this.duration){
+			update_time_progressbar(this);
+		}
+	});
 
 	this.set_track = function(track){
 		this.audio.src=track.path;

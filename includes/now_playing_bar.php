@@ -28,7 +28,7 @@
             $('#nowPlayingBar .track_info .track_name').html(track.title);
             $('#nowPlayingBar .track_info .artist_name').html(track.name);
             $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
-            $('.progress_time.remaining').html(track.duration);
+            // $('.progress_time.remaining').html(track.duration);
         });
 
         if(play){
@@ -90,7 +90,7 @@
         </div>
 
         <div class="playback_bar">
-            <span class="progress_time current">0.00</span>
+            <span class="progress_time current">0:00</span>
             <div class="progressbar">
                 <div class="progressbar_bg">
                     <div class="progress_cur"></div>

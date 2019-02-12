@@ -1,10 +1,12 @@
 
 var current_playlist = [];
+var shuffle_playlist = [];
 var audio_element;
 var mouseDown;
 var current_index=0;
 var currentTime;
 var repeat = false;
+var shuffled = false;
 
 function format_time(seconds){
 	var time = Math.round(seconds);

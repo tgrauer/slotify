@@ -13,11 +13,11 @@
 <script>
 
     $(document).ready(function(){       
-        current_playlist = <?php echo $json_array;?>;
+        var new_playlist = <?php echo $json_array;?>;
         audio_element = new Audio();
-        set_track(current_playlist[0], current_playlist, false);
+        set_track(new_playlist[0], new_playlist, false);
         update_time_progressbar(audio_element.audio);
-
+        console.log(new_playlist);
         $('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(e){
             e.preventDefault();
         });
@@ -70,7 +70,7 @@
         if(audio_element.audio.currentTime >= 3 || currentTime == 0){
             audio_element.set_time(0);
         }else{
-            current_index = current_index - 1;
+            current_index = current_index ? current_index - 1 : 0;
             set_track(current_playlist[current_index], current_playlist, true);
         }
     }
@@ -89,7 +89,7 @@
             current_index ++;
         }
 
-        var trackto_play = current_playlist[current_index];
+        var trackto_play = shuffled ? shuffle_playlist[current_index] : current_playlist[current_index];
         set_track(trackto_play, current_playlist, true);
     }
 
@@ -104,9 +104,45 @@
         $('button.volume').toggle();
     }
 
+    function shuffle(){
+        shuffled = !shuffled;
+        $('.controlBtn.shuffle').toggleClass('active_btn');
+
+        if(shuffled){
+            shuffle_array(shuffle_playlist);
+            current_index = shuffle_playlist.indexOf(audio_element.currently_playing.id);
+        }else{
+            current_index = current_playlist.indexOf(audio_element.currently_playing.id);
+        }
+    }
+
+    function shuffle_array(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
+
     function set_track(track_id, new_playlist, play){
         
-        current_index = current_playlist.indexOf(track_id);
+        if(new_playlist != current_playlist){
+            current_playlist = new_playlist;
+            shuffle_playlist = current_playlist.slice();
+            shuffle_array(shuffle_playlist);
+        }
+
+        if(shuffled){
+            current_index = shuffle_playlist.indexOf(track_id);
+        }else{
+            current_index = current_playlist.indexOf(track_id);
+        }
+
+        console.log(current_index);
+
         pause_song();
 
         $.post('includes/handlers/ajax/get_song_json.php', {song_id: track_id}, function(data) {
@@ -114,26 +150,22 @@
             var track = JSON.parse(data);
             track = track[0];
             audio_element.set_track(track);
-            play_song();
+            if(play){play_song();}
 
             $('#nowPlayingBar .track_info .track_name').html(track.title);
             $('#nowPlayingBar .track_info .artist_name').html(track.name);
             $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
         });
-
-        if(play){audio_element.play();}
     }
 
     function play_song(){
         
         if(audio_element.audio.currentTime == 0){
-            $.post('includes/handlers/ajax/update_plays.php', {song_id: audio_element.currently_playing.id}, function(data) {
-            });
+            $.post('includes/handlers/ajax/update_plays.php', {song_id: audio_element.currently_playing.id}, function(data) {});
         }
 
         $('button.play').hide();
         $('button.pause').show();
-        console.log(audio_element);
         audio_element.play();
     }
 
@@ -168,7 +200,7 @@
 
         <div class="content playerControls">
             <div class="buttons">
-                <button class="btn controlBtn shuffle" title="Shuffle"><i class="fas fa-random"></i></button>
+                <button class="btn controlBtn shuffle" title="Shuffle" onclick="shuffle()"><i class="fas fa-random"></i></button>
                 <button class="btn controlBtn previous" title="Previous" onclick="prev_song()"><i class="fas fa-step-backward"></i></button>
                 <button class="btn controlBtn play" title="Play" onclick="play_song()"><i class="fas fa-play-circle"></i></button>
                 <button class="btn controlBtn pause" title="Pause" style="display: none;" onclick="pause_song()"><i class="fas fa-pause-circle"></i></button>

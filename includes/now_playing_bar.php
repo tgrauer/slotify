@@ -17,7 +17,7 @@
         audio_element = new Audio();
         set_track(new_playlist[0], new_playlist, false);
         update_time_progressbar(audio_element.audio);
-        console.log(new_playlist);
+        console.log('New Playlist'+new_playlist);
         $('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(e){
             e.preventDefault();
         });
@@ -164,14 +164,14 @@
             $.post('includes/handlers/ajax/update_plays.php', {song_id: audio_element.currently_playing.id}, function(data) {});
         }
 
-        $('button.play').hide();
-        $('button.pause').show();
+        $('.playerControls button.play').hide();
+        $('.playerControls button.pause').show();
         audio_element.play();
     }
 
     function pause_song(){
-        $('button.play').show();
-        $('button.pause').hide();
+        $('.playerControls button.play').show();
+        $('.playerControls button.pause').hide();
         audio_element.pause();
     }
 

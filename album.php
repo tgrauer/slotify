@@ -35,9 +35,16 @@
 
                 $songs = $Album->get_songs();
 
+                    echo '<pre>';
+                    print_r($songs);
+                    echo '</pre>';
                 $i=1;
+
+                $newsong_array=[];
                 foreach ($songs as $song_id) {
                     $Song = new Song($song_id['id']);
+                    
+                    array_push($newsong_array, $song_id['id']);                    
 
                     $song_title = $Song->get_title();
                     $album_artist = $Song->get_artist();
@@ -45,7 +52,7 @@
 
                     echo '<li class="tracklist_row">
                             <div class="track_count">
-                            <button class="btn controlBtn play" title="Play"><i class="fas fa-play"></i></button>
+                            <button class="btn controlBtn play" title="Play" onclick="set_track(\''.$Song->get_id().'\',temp_playlist, true)"><i class="fas fa-play"></i></button>
                                 <span class="track_number">'.$i.'</span>
                             </div>
 
@@ -66,7 +73,14 @@
                     $i++;
 
                 }
+
+                $newsong_array = json_encode($newsong_array);
             ?>
+
+            <script>
+                var temp_song_ids = '<?php echo $newsong_array?>'; 
+                temp_playlist = JSON.parse(temp_song_ids); 
+            </script>
         </ul>
     </div>
 

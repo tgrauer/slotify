@@ -1,6 +1,7 @@
 
 var current_playlist = [];
 var shuffle_playlist = [];
+var temp_playlist = [];
 var audio_element;
 var mouseDown;
 var current_index=0;

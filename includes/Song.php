@@ -45,6 +45,10 @@
 			return $this->title;
 		}
 
+		public function get_id(){
+			return $this->id;
+		}
+
 		public function get_artist(){
 			return new Artist($this->artist_id);
 		}

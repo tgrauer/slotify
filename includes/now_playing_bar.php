@@ -1,6 +1,6 @@
 <?php 
     
-    include 'db.php';
+    // include 'db.php';
 
     $rand_songs = $pdo->query("SELECT id FROM songs ORDER BY RAND() LIMIT 10")->fetchAll();
     $rand_songs_array =[];
@@ -17,7 +17,7 @@
         audio_element = new Audio();
         set_track(new_playlist[0], new_playlist, false);
         update_time_progressbar(audio_element.audio);
-        console.log('New Playlist'+new_playlist);
+
         $('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(e){
             e.preventDefault();
         });
@@ -141,8 +141,6 @@
             current_index = current_playlist.indexOf(track_id);
         }
 
-        console.log(current_index);
-
         pause_song();
 
         $.post('includes/handlers/ajax/get_song_json.php', {song_id: track_id}, function(data) {
@@ -150,11 +148,11 @@
             var track = JSON.parse(data);
             track = track[0];
             audio_element.set_track(track);
-            if(play){play_song();}
 
             $('#nowPlayingBar .track_info .track_name').html(track.title);
             $('#nowPlayingBar .track_info .artist_name').html(track.name);
             $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
+            if(play){play_song();}
         });
     }
 
@@ -177,62 +175,64 @@
 
 </script>
 
-<div id="nowPlayingBar">
-    <div class="col-sm-4" id="nowPlayingLeft">
-        <div class="content">
-            <span class="album_link">
-                <img src="" alt="" class="img-responsive album_artwork">
-            </span>
-
-            <div class="track_info">
-                <span class="track_name">
-                    <span></span>
+<!-- <div class="container-fluid" id="nowPlayingBarCnt"> -->
+    <div id="nowPlayingBar">
+        <div class="col-sm-4" id="nowPlayingLeft">
+            <div class="content">
+                <span class="album_link">
+                    <img src="" alt="" class="img-responsive album_artwork">
                 </span>
 
-                <span class="artist_name">
-                    <span></span>
-                </span>
-            </div>
-        </div>    
-    </div>
+                <div class="track_info">
+                    <span class="track_name">
+                        <span></span>
+                    </span>
 
-    <div class="col-sm-4" id="nowPlayingCenter">
-
-        <div class="content playerControls">
-            <div class="buttons">
-                <button class="btn controlBtn shuffle" title="Shuffle" onclick="shuffle()"><i class="fas fa-random"></i></button>
-                <button class="btn controlBtn previous" title="Previous" onclick="prev_song()"><i class="fas fa-step-backward"></i></button>
-                <button class="btn controlBtn play" title="Play" onclick="play_song()"><i class="fas fa-play-circle"></i></button>
-                <button class="btn controlBtn pause" title="Pause" style="display: none;" onclick="pause_song()"><i class="fas fa-pause-circle"></i></button>
-                <button class="btn controlBtn next" title="Next" onclick="next_song()"><i class="fas fa-step-forward"></i></button>
-                <button class="btn controlBtn repeat" title="Repeat" onclick="set_repeat()"><i class="fas fa-redo-alt"></i></button>
-            </div>
+                    <span class="artist_name">
+                        <span></span>
+                    </span>
+                </div>
+            </div>    
         </div>
 
-        <div class="playback_bar">
-            <span class="progress_time current">0:00</span>
-            <div class="progressbar">
-                <div class="progressbar_bg">
-                    <div class="progress_cur"></div>
+        <div class="col-sm-4" id="nowPlayingCenter">
+
+            <div class="content playerControls">
+                <div class="buttons">
+                    <button class="btn controlBtn shuffle" title="Shuffle" onclick="shuffle()"><i class="fas fa-random"></i></button>
+                    <button class="btn controlBtn previous" title="Previous" onclick="prev_song()"><i class="fas fa-step-backward"></i></button>
+                    <button class="btn controlBtn play" title="Play" onclick="play_song()"><i class="fas fa-play-circle"></i></button>
+                    <button class="btn controlBtn pause" title="Pause" style="display: none;" onclick="pause_song()"><i class="fas fa-pause-circle"></i></button>
+                    <button class="btn controlBtn next" title="Next" onclick="next_song()"><i class="fas fa-step-forward"></i></button>
+                    <button class="btn controlBtn repeat" title="Repeat" onclick="set_repeat()"><i class="fas fa-redo-alt"></i></button>
                 </div>
             </div>
-            <span class="progress_time remaining"></span>
+
+            <div class="playback_bar">
+                <span class="progress_time current">0:00</span>
+                <div class="progressbar">
+                    <div class="progressbar_bg">
+                        <div class="progress_cur"></div>
+                    </div>
+                </div>
+                <span class="progress_time remaining"></span>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4" id="nowPlayingRight">
+            <div class="volume_bar">
+                
+                <button class="btn controlBtn mute" title="Volume" onclick="mute()" style="display:none;" ><i class="fas fa-volume-mute"></i></button>
+                <button class="btn controlBtn volume" title="Volume" onclick="mute()"><i class="fas fa-volume-up" ></i></button>
+
+                <div class="progressbar">
+                    <div class="progressbar_bg">
+                        <div class="progress_cur"></div>
+                    </div>
+                </div>
+            </div>    
         </div>
 
     </div>
-
-    <div class="col-sm-4" id="nowPlayingRight">
-        <div class="volume_bar">
-            
-            <button class="btn controlBtn mute" title="Volume" onclick="mute()" style="display:none;" ><i class="fas fa-volume-mute"></i></button>
-            <button class="btn controlBtn volume" title="Volume" onclick="mute()"><i class="fas fa-volume-up" ></i></button>
-
-            <div class="progressbar">
-                <div class="progressbar_bg">
-                    <div class="progress_cur"></div>
-                </div>
-            </div>
-        </div>    
-    </div>
-
-</div>
+<!-- </div> -->

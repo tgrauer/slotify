@@ -133,7 +133,7 @@ body.bg{
 	#nowPlayingBar{
 		display: flex;
 		height: 105px;
-		padding: 10px 15px 15px;
+		padding: 18px 15px 15px;
 		box-sizing:border-box;
 
 		.content{
@@ -419,6 +419,13 @@ button.controlBtn{
 		width: 12%;
 		float: left;
 		text-align: right;
+	}
+}
+
+.logo, .nav_link, .grid_view .album_cover, .grid_view .album_title{
+
+	&:hover{
+		cursor: pointer;
 	}
 }
 

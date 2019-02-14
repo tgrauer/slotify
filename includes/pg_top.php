@@ -1,9 +1,14 @@
 <?php 
     
     include 'includes/db.php';
+    include 'includes/Artist.php';
+    include 'includes/Album.php';
+    include 'includes/Song.php';
+    
     session_start();
     if(isset($_SESSION['username'])){
         $userLoggedIn = $_SESSION['username'];
+        echo "<script>user_logged_in = '$userLoggedIn';</script>";
     }else{
         header('Location: register.php');
     }
@@ -39,16 +44,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/site.js"></script>
-
-    <script>
-        // $('body').on('click', function(){
-        //     console.log('test');
-        //     var audioElement = new Audio();
-        //     audioElement.set_track('music/01-1607583-Kinematic-_Even Then_ The Band Played On.mp3'); 
-        //     audioElement.audio.play();
-
-        // });
-    </script>
 </head>
 
 <body>

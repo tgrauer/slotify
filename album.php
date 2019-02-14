@@ -1,9 +1,5 @@
 <?php 
-    include 'includes/pg_top.php'; 
-
-    include 'includes/Artist.php';
-    include 'includes/Album.php';
-    include 'includes/Song.php';
+    include 'includes/includes.php';
 
     if(isset($_GET['album_id'])){
         $album_id = $_GET['album_id'];
@@ -34,21 +30,14 @@
             <?php 
 
                 $songs = $Album->get_songs();
-
-                    echo '<pre>';
-                    print_r($songs);
-                    echo '</pre>';
                 $i=1;
-
                 $newsong_array=[];
+
                 foreach ($songs as $song_id) {
                     $Song = new Song($song_id['id']);
-                    
                     array_push($newsong_array, $song_id['id']);                    
-
                     $song_title = $Song->get_title();
                     $album_artist = $Song->get_artist();
-                    // echo $album_artist;
 
                     echo '<li class="tracklist_row">
                             <div class="track_count">
@@ -84,6 +73,5 @@
         </ul>
     </div>
 
-<?php include 'includes/pg_bottom.php'; ?>
                     
                 

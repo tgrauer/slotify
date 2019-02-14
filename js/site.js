@@ -8,6 +8,7 @@ var current_index=0;
 var currentTime;
 var repeat = false;
 var shuffled = false;
+var user_logged_in;
 
 function format_time(seconds){
 	var time = Math.round(seconds);
@@ -16,6 +17,16 @@ function format_time(seconds){
 	var extra_zero = (seconds < 10) ? "0" :"";
 
 	return minutes + ':'+ extra_zero+ seconds;
+}
+
+function open_page(url){
+	if(url.indexOf('?')==-1){
+		url = url+'?';
+	}
+	var encoded_url = encodeURI(url + '?userLoggedIn=' +user_logged_in);	
+	$('.main_cnt .row').load(encoded_url);
+	$('body').scrollTop(0);
+	history.pushState(null, null, url);
 }
 
 function update_time_progressbar(audio){

@@ -63,27 +63,6 @@ body.bg{
 		font-size: 13px;
 	}
 
-	.bdr_btn{
-		background-color: transparent;
-		border: 1px solid #fff;
-		@include border-radius(100px);
-		width: 100%;
-		margin-top: 15px;
-		margin-bottom: 20px;
-		text-transform: uppercase;
-		font-size: 14px;
-		font-weight: 600;
-		height: 45px;
-		@include transition(all, ease, 0.3s);
-
-		&:hover{
-			background-color: #fff;
-			color:#333;
-		}
-
-		&:focus{outline: none;border: none;}
-	}
-
 	.hasAccount{
 		text-align: center;
 		font-size: 14px;
@@ -97,6 +76,61 @@ body.bg{
 	}
 
 	.hideForms:hover{cursor: pointer;}
+}
+
+.bdr_btn{
+	background-color: transparent;
+	border: 1px solid #fff;
+	@include border-radius(100px);
+	width: 100%;
+	margin-top: 15px;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 600;
+	height: 45px;
+	@include transition(all, ease, 0.3s);
+
+	&:hover{
+		background-color: #fff;
+		color:#333;
+	}
+
+	&:focus{outline: none;border: none;}
+}
+
+.artist_info{
+	h1{
+		margin: 20px 0;
+		color: #ddd;
+		font-weight: 700;
+		font-size: 26px;
+		text-align: center;
+	}
+}
+
+.tracklist h2, .grid_view h2{
+	text-align: center;
+	font-weight: 700;
+}
+
+.artist_name:hover, .album_link img:hover, .track_name:hover{cursor: pointer;}
+
+.bdrbtm{
+	border-bottom: 1px solid #666;
+    overflow: auto;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.artist_btn{
+	background: $green;
+	border: 1px solid $green;
+	max-width: 200px;
+	color: #fff;
+	font-weight: 700;
+	margin:0 auto;
+	display: block;
 }
 
 .home_rightcol{
@@ -362,6 +396,16 @@ button.controlBtn{
 	}
 }
 
+.tracklist_row.active{
+	background: #2a2a2a;
+	
+	.controlBtn.play, .track_options{
+		visibility: visible;
+	}
+
+	.track_number{visibility: hidden;}
+}
+
 .track_list{
 	padding: 0;
 	list-style:none;
@@ -413,8 +457,8 @@ button.controlBtn{
 		font-size: 18px;
 
 		&:hover{cursor: pointer;}
-	}
-
+	
+}
 	.track_duration{
 		width: 12%;
 		float: left;
@@ -427,6 +471,9 @@ button.controlBtn{
 	&:hover{
 		cursor: pointer;
 	}
+
+	&:focus{outline: none !important;}
+	&:active{outline: none !important;}
 }
 
 

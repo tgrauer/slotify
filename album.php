@@ -40,10 +40,10 @@
                     $album_artist = $Song->get_artist();
 
                     echo '<li class="tracklist_row">
-                            <div class="track_count">
-                            <button class="btn controlBtn play" title="Play" onclick="set_track(\''.$Song->get_id().'\',temp_playlist, true)"><i class="fas fa-play"></i></button>
-                                <span class="track_number">'.$i.'</span>
-                            </div>
+                            <div class="track_count">';
+                    echo "<button class='btn controlBtn play' title='Play' onclick='set_track(\"".$Song->get_id()."\", temp_playlist, true)'><i class='fas fa-play'></i></button>
+                                <span class='track_number'>".$i."</span>";
+                        echo '</div>
 
                             <div class="track_info">
                                 <span class="track_name">'.$song_title.'</span>

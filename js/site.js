@@ -23,7 +23,7 @@ function open_page(url){
 	if(url.indexOf('?')==-1){
 		url = url+'?';
 	}
-	var encoded_url = encodeURI(url + '?userLoggedIn=' +user_logged_in);	
+	var encoded_url = encodeURI(url + '&userLoggedIn=' +user_logged_in);	
 	$('.main_cnt .row').load(encoded_url);
 	$('body').scrollTop(0);
 	history.pushState(null, null, url);
@@ -39,6 +39,10 @@ function update_time_progressbar(audio){
 function update_volumebar(audio){
 	var volume =  audio.volume * 100;
 	$('.volume_bar .progress_cur').css({'width': volume +'%'});
+}
+
+function play_first_song(){
+	set_track(temp_playlist[0],temp_playlist,true);
 }
 
 function Audio(){
@@ -94,4 +98,6 @@ $(document).ready(function(){
 		$('#loginForm').show();
 		$('#registerForm').hide();
 	});
+
+	
 });

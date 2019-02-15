@@ -17,7 +17,7 @@
         audio_element = new Audio();
         set_track(new_playlist[0], new_playlist, false);
         update_time_progressbar(audio_element.audio);
-
+        console.log('New pl'+new_playlist);
         $('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(e){
             e.preventDefault();
         });
@@ -128,7 +128,7 @@
     }
 
     function set_track(track_id, new_playlist, play){
-        
+
         if(new_playlist != current_playlist){
             current_playlist = new_playlist;
             shuffle_playlist = current_playlist.slice();
@@ -148,10 +148,14 @@
             var track = JSON.parse(data);
             track = track[0];
             audio_element.set_track(track);
+            console.log(track);
 
             $('#nowPlayingBar .track_info .track_name').html(track.title);
+            $('#nowPlayingBar .track_info .track_name').attr('onclick', 'open_page("album.php?album_id='+track.album +'")');
             $('#nowPlayingBar .track_info .artist_name').html(track.name);
+            $('#nowPlayingBar .track_info .artist_name').attr('onclick', 'open_page("artist.php?artist_id='+track.artist +'")');
             $('#nowPlayingBar .album_link img').attr('src', track.artwork_path);
+            $('#nowPlayingBar .album_link img').attr('onclick', 'open_page("album.php?album_id='+track.album +'")');
             if(play){play_song();}
         });
     }
@@ -175,7 +179,7 @@
 
 </script>
 
-<!-- <div class="container-fluid" id="nowPlayingBarCnt"> -->
+<div class="container-fluid" id="nowPlayingBarCnt">
     <div id="nowPlayingBar">
         <div class="col-sm-4" id="nowPlayingLeft">
             <div class="content">
@@ -235,4 +239,4 @@
         </div>
 
     </div>
-<!-- </div> -->
+</div>

@@ -28,5 +28,12 @@
 			return $stmt->fetchColumn();
 		}
 
+		public function get_songs(){
+			$sql = "SELECT id FROM songs WHERE artist =? ORDER by plays ASC";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute([$this->id]);
+			return $stmt->fetchAll();
+		}
+
 	}
 ?>

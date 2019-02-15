@@ -1,5 +1,4 @@
 <?php 
-    
     include 'includes/includes.php'; 
 ?>
 
@@ -17,16 +16,15 @@
             foreach ($albums as $album) {
                 if($i % 4 == 0 || $i == 0){echo '<div class="row">';}
                 echo '<div class="col-sm-3 col-xs-6">';
-                echo "<span role='link' tabindex='0' onclick='open_page(\"album.php?album_id=".$album['id']."\")'>
+                echo "<span onclick='open_page(\"album.php?album_id=".$album['id']."\")'>
                     <img class='img-responsive album_cover' src='".$album['artwork_path']."' alt='".$album['title']."' />
                     </span>";
-                echo "<p class='album_title'><span role='link' tabindex='0' onclick='open_page(\"album.php?album_id=".$album['id']."\")'></span></p>";
+                echo "<p class='album_title'><span onclick='open_page(\"album.php?album_id=".$album['id']."\")'>".$album['title']."</span></p>";
                 echo '</div>';
 
                 if($j - 1 == $i && $i !=0){echo '</div>'; $j+=4;}
                 $i++;
             }
-
         ?>
     </div>
 </div>

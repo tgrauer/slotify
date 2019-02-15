@@ -58,7 +58,23 @@ body.bg {
 .loginCnt label {
   font-size: 13px;
 }
-.loginCnt .bdr_btn {
+.loginCnt .hasAccount {
+  text-align: center;
+  font-size: 14px;
+}
+.loginCnt #registerForm {
+  display: none;
+}
+.loginCnt .alert {
+  margin-top: 30px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=82);
+  opacity: 0.82;
+}
+.loginCnt .hideForms:hover {
+  cursor: pointer;
+}
+
+.bdr_btn {
   background-color: transparent;
   border: 1px solid #fff;
   -moz-border-radius: 100px;
@@ -76,28 +92,47 @@ body.bg {
   -webkit-transition: all, ease, 0.3s;
   transition: all, ease, 0.3s;
 }
-.loginCnt .bdr_btn:hover {
+.bdr_btn:hover {
   background-color: #fff;
   color: #333;
 }
-.loginCnt .bdr_btn:focus {
+.bdr_btn:focus {
   outline: none;
   border: none;
 }
-.loginCnt .hasAccount {
+
+.artist_info h1 {
+  margin: 20px 0;
+  color: #ddd;
+  font-weight: 700;
+  font-size: 26px;
   text-align: center;
-  font-size: 14px;
 }
-.loginCnt #registerForm {
-  display: none;
+
+.tracklist h2, .grid_view h2 {
+  text-align: center;
+  font-weight: 700;
 }
-.loginCnt .alert {
-  margin-top: 30px;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=82);
-  opacity: 0.82;
-}
-.loginCnt .hideForms:hover {
+
+.artist_name:hover, .album_link img:hover, .track_name:hover {
   cursor: pointer;
+}
+
+.bdrbtm {
+  border-bottom: 1px solid #666;
+  overflow: auto;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.artist_btn {
+  background: #07d159;
+  border: 1px solid #07d159;
+  max-width: 200px;
+  color: #fff;
+  font-weight: 700;
+  margin: 0 auto;
+  display: block;
 }
 
 .home_rightcol {
@@ -347,6 +382,16 @@ button.controlBtn:focus {
   margin-bottom: 10px;
 }
 
+.tracklist_row.active {
+  background: #2a2a2a;
+}
+.tracklist_row.active .controlBtn.play, .tracklist_row.active .track_options {
+  visibility: visible;
+}
+.tracklist_row.active .track_number {
+  visibility: hidden;
+}
+
 .track_list {
   padding: 0;
   list-style: none;
@@ -401,4 +446,10 @@ button.controlBtn:focus {
 
 .logo:hover, .nav_link:hover, .grid_view .album_cover:hover, .grid_view .album_title:hover {
   cursor: pointer;
+}
+.logo:focus, .nav_link:focus, .grid_view .album_cover:focus, .grid_view .album_title:focus {
+  outline: none !important;
+}
+.logo:active, .nav_link:active, .grid_view .album_cover:active, .grid_view .album_title:active {
+  outline: none !important;
 }

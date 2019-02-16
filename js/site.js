@@ -9,6 +9,7 @@ var currentTime;
 var repeat = false;
 var shuffled = false;
 var user_logged_in;
+var timer;
 
 function format_time(seconds){
 	var time = Math.round(seconds);
@@ -20,6 +21,10 @@ function format_time(seconds){
 }
 
 function open_page(url){
+
+	if(timer != null ){
+		clearTimeout(timer);
+	}
 	if(url.indexOf('?')==-1){
 		url = url+'?';
 	}

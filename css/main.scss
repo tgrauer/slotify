@@ -114,7 +114,7 @@ body.bg{
 	font-weight: 700;
 }
 
-.artist_name:hover, .album_link img:hover, .track_name:hover{cursor: pointer;}
+.artist_name:hover, .album_link img:hover, .track_name:hover, .entity_info .artist:hover{cursor: pointer;}
 
 .bdrbtm{
 	border-bottom: 1px solid #666;
@@ -474,6 +474,55 @@ button.controlBtn{
 
 	&:focus{outline: none !important;}
 	&:active{outline: none !important;}
+}
+
+.search_cnt{
+	background: #242424;
+	padding: 20px;
+	margin-bottom: 25px;
+
+	h3{
+		margin: 0;
+		font-weight: 400;
+		font-size: 18px;
+	}
+
+	input{
+		width: 100%;
+		background-color: transparent;
+		border: none;
+		padding: 15px 0;
+		color: #ddd;
+		margin-top: 10px;
+		height: 60px;
+		font-weight: 700;
+		font-size: 40px;
+		outline: none;
+	}
+}
+
+.search_result_row{
+	.track_list{
+		margin-top: 0px;
+	}
+	h3{
+		margin-bottom: 30px;
+	}
+
+	.artist_name{
+		margin-bottom: 5px;
+		font-weight: 700;
+	}
+}
+
+.artist_results {
+	h3{
+		margin-bottom: 30px;
+	}
+}
+
+.no_results{
+	color: tomato;
 }
 
 

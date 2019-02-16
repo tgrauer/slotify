@@ -20,7 +20,7 @@
 
         <div class="col-sm-9">
             <h2 class="album_title"><?php echo $Album->get_title(); ?></h2>
-            <p class="artist">By <?php echo $artist->get_artistname(); ?></p>
+            <p class="artist" onclick="open_page('artist.php?artist_id='+<?php echo $artist->get_artist_id(); ?>)">By <?php echo $artist->get_artistname(); ?></p>
             <p class="numb_songs"><?php echo $Album->song_count(); ?> Songs</p>
         </div>
     </div>

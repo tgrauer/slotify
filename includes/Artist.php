@@ -35,5 +35,9 @@
 			return $stmt->fetchAll();
 		}
 
+		public function get_artist_id(){
+			return $this->id;
+		}
+
 	}
 ?>

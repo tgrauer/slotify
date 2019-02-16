@@ -52,6 +52,21 @@ function create_playlist(){
 	}
 }
 
+function delete_playlist(playlist_id){
+	var r = confirm('Are you sure you want to delete this playlist?');
+
+	if(r){
+		$.post('includes/handlers/delete_playlist.php', {playlist_id:playlist_id}).done(function(error){
+					if(error != ''){
+						alert(error);
+						return;
+					}
+
+					open_page('playlists.php');
+				});
+	}
+}
+
 function update_time_progressbar(audio){
 	$('.progress_time.current').text(format_time(audio.currentTime));
 	$('.progress_time.remaining').text(format_time(audio.duration - audio.currentTime));

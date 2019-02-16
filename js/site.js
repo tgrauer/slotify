@@ -34,6 +34,24 @@ function open_page(url){
 	history.pushState(null, null, url);
 }
 
+function create_playlist(){
+	console.log(user_logged_in);
+	var new_playlist = $('input#new_playlist').val();
+
+	if(new_playlist !=''){
+		$.post('includes/handlers/create_playlist.php', {name: new_playlist, username: user_logged_in}).done(function(error){
+			if(error != ''){
+				alert(error);
+				return;
+			}
+
+			$('#playlist_modal').modal('toggle');
+			$('.modal-backdrop').removeClass('in');
+			window.location= 'playlists.php';
+		});
+	}
+}
+
 function update_time_progressbar(audio){
 	$('.progress_time.current').text(format_time(audio.currentTime));
 	$('.progress_time.remaining').text(format_time(audio.duration - audio.currentTime));

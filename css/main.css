@@ -25,6 +25,27 @@ body.bg {
   position: relative;
 }
 
+.btn:focus, .btn:active, input:focus, input:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+}
+
 .layer {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -102,11 +123,12 @@ body.bg {
 }
 
 .artist_info h1 {
-  margin: 20px 0;
+  margin: 20px 0 30px 0;
   color: #ddd;
   font-weight: 700;
-  font-size: 26px;
+  font-size: 32px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .tracklist h2, .grid_view h2 {
@@ -133,6 +155,14 @@ body.bg {
   font-weight: 700;
   margin: 0 auto;
   display: block;
+  outline: none;
+}
+.artist_btn:active, .artist_btn:focus {
+  outline: none;
+}
+.artist_btn:hover {
+  color: #07d159;
+  border: 1px solid #fff;
 }
 
 .home_rightcol {
@@ -337,7 +367,7 @@ button.controlBtn:focus {
   padding: 25px;
   margin-bottom: 100px;
   position: relative;
-  left: 25%;
+  left: 24.5%;
 }
 
 .pg_heading_lg {
@@ -444,13 +474,13 @@ button.controlBtn:focus {
   text-align: right;
 }
 
-.logo:hover, .nav_link:hover, .grid_view .album_cover:hover, .grid_view .album_title:hover {
+.logo:hover, .nav_link:hover, .grid_view .album_cover:hover, .grid_view .album_title:hover, .playlist_col:hover {
   cursor: pointer;
 }
-.logo:focus, .nav_link:focus, .grid_view .album_cover:focus, .grid_view .album_title:focus {
+.logo:focus, .nav_link:focus, .grid_view .album_cover:focus, .grid_view .album_title:focus, .playlist_col:focus {
   outline: none !important;
 }
-.logo:active, .nav_link:active, .grid_view .album_cover:active, .grid_view .album_title:active {
+.logo:active, .nav_link:active, .grid_view .album_cover:active, .grid_view .album_title:active, .playlist_col:active {
   outline: none !important;
 }
 
@@ -494,4 +524,78 @@ button.controlBtn:focus {
 
 .no_results {
   color: tomato;
+}
+
+.modal-header {
+  color: #07d159;
+  border-bottom: 1px solid #000;
+}
+
+.modal-title {
+  text-shadow: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.modal-footer {
+  border-top: 1px solid #000;
+}
+
+.modal-content {
+  background: #282828;
+}
+.modal-content input {
+  background: #111;
+  border: 1px solid #000;
+  height: 40px;
+  outline: none !important;
+  color: #bbb;
+}
+.modal-content input:focus {
+  outline: none !important;
+}
+
+#playlist_modal .close {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+  color: #ddd;
+  text-shadow: none;
+}
+#playlist_modal .btn {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+#playlist_modal .create_pl_btn.btn {
+  background: #07d159;
+  border: 1px solid #07d159;
+}
+#playlist_modal .create_pl_btn.btn:hover {
+  background: #06b84e;
+}
+#playlist_modal .btn.cancel {
+  background: #aaa;
+}
+
+.playlist {
+  border: 1px solid #333;
+  padding: 25px 0;
+}
+.playlist i.fas.fa-3x.fa-music {
+  font-size: 60px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.playlist p {
+  padding-top: 15px;
+  border-top: 1px solid #333;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.playlist_row {
+  padding: 0 15px;
 }

@@ -30,6 +30,28 @@ body.bg{
 	position: relative;
 }
 
+.btn:focus,.btn:active, input:focus, input:active {
+   outline: none !important;
+   box-shadow: none;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
 .layer {
     background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
@@ -101,11 +123,12 @@ body.bg{
 
 .artist_info{
 	h1{
-		margin: 20px 0;
+		margin: 20px 0 30px 0;
 		color: #ddd;
 		font-weight: 700;
-		font-size: 26px;
+		font-size: 32px;
 		text-align: center;
+		text-transform: uppercase;
 	}
 }
 
@@ -131,6 +154,14 @@ body.bg{
 	font-weight: 700;
 	margin:0 auto;
 	display: block;
+	outline: none;
+
+	&:active, &:focus{outline: none;}
+
+	&:hover{
+		color: $green;
+		border: 1px solid #fff;
+	}
 }
 
 .home_rightcol{
@@ -341,7 +372,7 @@ button.controlBtn{
 	padding: 25px;
 	margin-bottom: 100px;
 	position: relative;
-    left: 25%;
+    left: 24.5%;
 }
 
 .pg_heading_lg{
@@ -466,7 +497,7 @@ button.controlBtn{
 	}
 }
 
-.logo, .nav_link, .grid_view .album_cover, .grid_view .album_title{
+.logo, .nav_link, .grid_view .album_cover, .grid_view .album_title, .playlist_col{
 
 	&:hover{
 		cursor: pointer;
@@ -523,6 +554,84 @@ button.controlBtn{
 
 .no_results{
 	color: tomato;
+}
+
+.modal-header{
+	color: $green;
+	border-bottom: 1px solid #000;
+}
+
+.modal-title{
+	@include text-shadow(none);
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.modal-footer{border-top: 1px solid #000;}
+
+.modal-content{
+	background: #282828;
+
+	input{
+		background: #111;
+		border: 1px solid #000;
+		height: 40px;
+		outline: none !important;
+		color: #bbb;
+
+		&:focus{outline: none !important;}
+	}
+}
+
+#playlist_modal{
+	.close{
+		@include opacity(0.5);
+		color: #ddd;
+		@include text-shadow(none);
+	}
+	.btn{
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+
+	.create_pl_btn.btn{
+		background: $green;
+		border: 1px solid $green;
+		&:hover{
+			background:darken($green,5%);
+		}
+	}
+
+	.btn.cancel{
+		background: #aaa;
+	}
+}
+
+
+.playlist{
+	border: 1px solid #333;
+	padding: 25px 0; 
+
+	i.fas.fa-3x.fa-music{
+		font-size: 60px;
+		margin: 0 auto;
+		display: block;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	p{
+		padding-top: 15px;
+		border-top: 1px solid #333;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: 800;
+		font-size: 18px;
+	}
+}
+
+.playlist_row{
+	padding: 0 15px;
 }
 
 

@@ -27,14 +27,12 @@ function addto_playlist(playlist_id){
 }
 
 function remove_from_playlist(playlist_id){
-	console.log(playlist_id);
-	var song_id = $(button).find('.song_id').val();
+
+	var song_id = $('.options_menu .song_id').val();
 	$.post('includes/handlers/ajax/remove_from_playlist.php', {playlist_id: playlist_id, song_id:song_id})
 	.done(function(){
 		hide_optionsmenu();
 	});
-
-	
 
 	open_page('playlist.php?id='+playlist_id);
 }

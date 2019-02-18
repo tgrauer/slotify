@@ -11,6 +11,34 @@ var shuffled = false;
 var user_logged_in;
 var timer;
 
+$(document).click(function(click) {
+	var target = $(click.target);
+	if(!target.hasClass('item') && !target.hasClass('fa-ellipsis-h')){
+		hide_optionsmenu();
+	}	
+});
+
+function addto_playlist(playlist_id){
+	var song_id = $('.options_menu .song_id').val();
+	$.post('includes/handlers/ajax/add_to_playlist.php', {playlist_id: playlist_id, song_id:song_id})
+	.done(function(){
+		hide_optionsmenu();
+	});
+}
+
+function remove_from_playlist(playlist_id){
+	console.log(playlist_id);
+	var song_id = $(button).find('.song_id').val();
+	$.post('includes/handlers/ajax/remove_from_playlist.php', {playlist_id: playlist_id, song_id:song_id})
+	.done(function(){
+		hide_optionsmenu();
+	});
+
+	
+
+	open_page('playlist.php?id='+playlist_id);
+}
+
 function format_time(seconds){
 	var time = Math.round(seconds);
 	var minutes = Math.floor(time / 60);
@@ -57,14 +85,38 @@ function delete_playlist(playlist_id){
 
 	if(r){
 		$.post('includes/handlers/delete_playlist.php', {playlist_id:playlist_id}).done(function(error){
-					if(error != ''){
-						alert(error);
-						return;
-					}
+			if(error != ''){
+				alert(error);
+				return;
+			}
 
-					open_page('playlists.php');
-				});
+			open_page('playlists.php');
+		});
 	}
+}
+
+function hide_optionsmenu(){
+	var menu= $('.options_menu');
+	if(menu.css('display') != 'none'){
+		menu.css({'display':'none'});
+	}
+}
+
+function show_optionsmenu(button){
+	var song_id = $(button).find('.song_id').val();
+	$('.options_menu .song_id').val(song_id);
+	var menu = $('.options_menu');
+	var menu_width = menu.width();
+	var scrollTop = $(window).scrollTop();
+	var element_offset = $(button).offset().top;
+	var top = element_offset - scrollTop;
+	var left = $(button).position().left;
+
+	menu.css({'top':top+'px', 'left':left +menu_width+'px', 'display':'inline'});
+}
+
+function open_pl_options(){
+	$('.addtopl_options').show();
 }
 
 function update_time_progressbar(audio){
@@ -122,8 +174,9 @@ function Audio(){
 	this.set_time = function(seconds){
 		this.audio.currentTime = seconds;
 	}
-
 }
+
+
 
 $(document).ready(function(){
 
@@ -136,6 +189,5 @@ $(document).ready(function(){
 		$('#loginForm').show();
 		$('#registerForm').hide();
 	});
-
 	
 });

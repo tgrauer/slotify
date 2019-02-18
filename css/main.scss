@@ -493,7 +493,7 @@ button.controlBtn{
 		font-size: 22px !important;
 		visibility: hidden;
 		position: absolute;
-
+		margin-top: 12px;
 	}
 
 	.track_options{
@@ -648,6 +648,51 @@ button.controlBtn{
 .playlist_row{
 	padding: 0 15px;
 }
+
+.options_menu{
+	background: #282828;
+	position: fixed;
+	width: 200px;
+	border: 1px solid #000;
+	@include border-radius(3px);
+	z-index: 1001;
+	display: none;
+
+	.item{
+		padding: 12px 20px;
+		width: 100%;
+		&:hover{
+			cursor: pointer;
+			background: #333;
+		}
+	}
+}
+
+.addtopl_options{
+	display: none;
+
+	p{
+		background: #222;
+		padding: 10px;
+		font-weight: 600;
+
+		&:hover{
+			cursor: pointer;
+			background: #333;
+		}
+	}
+}
+
+.addtopl_options{
+	-webkit-appearance:none;
+	option{
+		padding: 10px;
+		height: 20px;
+		font-size: 18px;
+	}
+}
+
+#hiddenOption {display: none;}
 
 
 

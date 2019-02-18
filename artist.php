@@ -9,6 +9,7 @@
     }
 
     $Artist = new Artist($artist_id);
+    session_start();
 ?>
 
 <div class="entity_info artist_info bdrbtm">
@@ -39,24 +40,24 @@
                 $album_artist = $Song->get_artist();
 
                 echo '<li class="tracklist_row">
-                        <div class="track_count">';
-                echo "<button class='btn controlBtn play' title='Play' onclick='set_track(\"".$Song->get_id()."\", temp_playlist, true)'><i class='fas fa-play'></i></button>
-                            <span class='track_number'>".$i."</span>";
+                            <div class="track_count">';
+                    echo "<button class='btn controlBtn play' title='Play' onclick='set_track(\"".$Song->get_id()."\", temp_playlist, true)'><i class='fas fa-play'></i></button>
+                                <span class='track_number'>".$i."</span>";
                     echo '</div>
-
                         <div class="track_info">
                             <span class="track_name">'.$song_title.'</span>
                             <span class="track_artist">'.$album_artist->get_artistname().'</span>
-                        </div>
+                        </div>';
 
-                        <div class="track_options">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
+                    echo "<div class='track_options' onclick='show_optionsmenu(this)'>
+                        <input type='hidden' class='song_id' value='" .$song_id['id'] ."' />
+                        <i class='fas fa-ellipsis-h'></i>
+                    </div>";
 
-                        <div class="track_duration">
+                    echo '<div class="track_duration">
                             <span class="duration">'.$Song->get_duration().'</span>
                         </div>
-                </li>';
+                    </li>';
 
                 $i++;
 
@@ -97,3 +98,25 @@
         }
     ?>
 </div>
+
+<nav class="options_menu">
+
+    <input type="hidden" class="song_id">
+    <div class="item addtopl" onclick="open_pl_options()">Add to Playlist</div>
+    <?php 
+
+        $dropdown ='<div class="addtopl_options">';
+
+            $sql = "SELECT id, name FROM playlists WHERE owner = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$_SESSION['username']]);
+            $playlists = $stmt->fetchAll();
+
+            foreach ($playlists as $pl) {
+                $dropdown .= '<p onclick="addto_playlist('.$pl['id'].')" data-pl="'.$pl['id'].'">'.$pl['name'].'</p>';
+            }
+
+        $dropdown .='</div>';
+        echo $dropdown;
+    ?>
+</nav>

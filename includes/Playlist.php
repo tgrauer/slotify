@@ -59,5 +59,22 @@
 			$stmt->execute([$this->id]);
 			return $stmt->fetchAll();
 		}
+
+		public static function get_playlist_dropdown($username){
+			$dropdown ='<select name="" id="" class="item playlist">
+            	<option value="">Add to Playlist</option>';
+
+            	$sql = "SELECT id, name FROM playlists WHERE owner = ?";
+            	$stmt = $db->prepare($sql);
+            	$stmt->execute([$username]);
+            	$playlists = $stmt->fetchAll();
+
+            	foreach ($playlists as $pl) {
+            		$dropdown= '<option value="'.$pl['id'].'">'.$pl['name'].'</option>';
+            	}
+
+        	$dropdown .='</select>';
+        	return $dropdown;
+		}
 	}
 ?>

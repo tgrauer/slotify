@@ -18,6 +18,26 @@ $(document).click(function(click) {
 	}	
 });
 
+function update_email(emailClass){
+	var email = $('.'+emailClass).val();
+	$.post('includes/handlers/ajax/update_email.php', {email:email, username:user_logged_in})
+	.done(function(response){
+		$('.'+emailClass).next('.message').text(response);
+	});
+}
+
+function update_pw(cur_pw, new_pw, confirm_pw){
+	var cur_pw = $('.'+cur_pw).val();
+	var new_pw = $('.'+new_pw).val();
+	var confirm_pw = $('.'+confirm_pw).val();
+	
+	$.post('includes/handlers/ajax/update_password.php', {cur_pw:cur_pw, new_pw:new_pw, confirm_pw: confirm_pw, username:user_logged_in})
+	.done(function(response){
+		console.log('test'+cur_pw);
+		$('.cur_pw').parent().parent().find('.message').text(response);
+	});
+}
+
 function addto_playlist(playlist_id){
 	var song_id = $('.options_menu .song_id').val();
 	$.post('includes/handlers/ajax/add_to_playlist.php', {playlist_id: playlist_id, song_id:song_id})

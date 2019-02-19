@@ -15,10 +15,11 @@
 		}
 	}else{
 		include 'includes/pg_top.php';
-		include 'includes/pg_bottom.php';
+		
 
 		$url = $_SERVER['REQUEST_URI'];
 		echo "<script>open_page('$url')</script>";
+		include 'includes/pg_bottom.php';
 		exit();
 	}
 

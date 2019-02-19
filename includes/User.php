@@ -25,5 +25,21 @@
 		public function get_username(){
 			return $this->user;
 		}
+
+		public function get_users_name(){
+			$sql = "SELECT CONCAT(fname, ' ', lname) AS name FROM users WHERE username = ?";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute([$this->user]);
+			$name=$stmt->fetchAll();
+			return $name[0]['name'];
+		}
+
+		public function get_email(){
+			$sql = "SELECT email FROM users WHERE username = ?";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute([$this->user]);
+			$email=$stmt->fetchAll();
+			return $email[0]['email'];
+		}
 	}
 ?>

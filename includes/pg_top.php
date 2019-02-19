@@ -1,20 +1,3 @@
-<?php 
-    
-    include 'includes/db.php';
-    include 'includes/Artist.php';
-    include 'includes/Album.php';
-    include 'includes/Song.php';
-    
-    session_start();
-    if(isset($_SESSION['username'])){
-        $userLoggedIn = $_SESSION['username'];
-        echo "<script>user_logged_in = '$userLoggedIn';</script>";
-    }else{
-        header('Location: register.php');
-    }
-
-?>
-
 <!doctype html>
 <html lang=en-us>
 <!--[if IE 7]>         <html class="ie7"> <![endif]-->
@@ -47,6 +30,23 @@
 </head>
 
 <body>
+
+    <?php 
+    
+    include 'includes/db.php';
+    include 'includes/Artist.php';
+    include 'includes/Album.php';
+    include 'includes/Song.php';
+    
+    session_start();
+    if(isset($_SESSION['username'])){
+        $userLoggedIn = $_SESSION['username'];
+        echo "<script>user_logged_in = '$userLoggedIn';</script>";
+    }else{
+        header('Location: register.php');
+    }
+
+?>
 
     <div class="container-fluid" id="main_cnt">
         <div class="row top_cnt">
